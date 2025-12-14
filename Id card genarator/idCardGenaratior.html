@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor ID Card Maker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ID Card Maker</h1>
+            <p class="subtitle">Create professional ID cards in seconds</p>
+        </header>
+
+        <div class="app-container">
+            <section class="form-section fade-in">
+                <h2>Card Details</h2>
+                
+                <div class="template-selector">
+                    <div class="template template-1 selected" data-template="1">
+                        <div class="template-header"></div>
+                        <div class="template-body">
+                            <div class="template-photo"></div>
+                        </div>
+                    </div>
+                    <div class="template template-2" data-template="2">
+                        <div class="template-header"></div>
+                        <div class="template-body">
+                            <div class="template-photo"></div>
+                        </div>
+                    </div>
+                    <div class="template template-3" data-template="3">
+                        <div class="template-header"></div>
+                        <div class="template-body">
+                            <div class="template-photo"></div>
+                        </div>
+                    </div>
+                    <div class="template template-4" data-template="4">
+                        <div class="template-header"></div>
+                        <div class="template-body">
+                            <div class="template-photo"></div>
+                        </div>
+                    </div>
+                    <div class="template template-5" data-template="5">
+                        <div class="template-header"></div>
+                        <div class="template-body">
+                            <div class="template-photo"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cardTitle">Card Title</label>
+                    <input type="text" id="cardTitle" placeholder="e.g., Visitor Pass" value="VISITOR PASS">
+                </div>
+
+                <div class="form-group">
+                    <label for="headerColor">Header Color</label>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #4361ee;" data-color="#4361ee"></div>
+                        <div class="color-option" style="background-color: #3f37c9;" data-color="#3f37c9"></div>
+                        <div class="color-option" style="background-color: #4895ef;" data-color="#4895ef"></div>
+                        <div class="color-option" style="background-color: #4cc9f0;" data-color="#4cc9f0"></div>
+                        <div class="color-option" style="background-color: #f72585;" data-color="#f72585"></div>
+                        <div class="color-option" style="background-color: #7209b7;" data-color="#7209b7"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Company/Organization</label>
+                    <input type="text" id="company" placeholder="ABC Corporation">
+                </div>
+
+                <div class="form-group">
+                    <label for="ID Number">ID Number</label>
+                    <input type="text" id="purpose" placeholder="CSE-123 etc.">
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Department</label>
+                    <input type="text" id="contact" placeholder="CSE">
+                </div>
+
+                <div class="form-group">
+                    <label for="validUntil">Valid Until</label>
+                    <input type="date" id="validUntil">
+                </div>
+
+                <div class="form-group">
+                    <label for="photo">Upload Photo</label>
+                    <input type="file" id="photo" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="logo">Upload Logo</label>
+                    <input type="file" id="logo" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalInfo">Signature</label>
+                    <textarea id="additionalInfo" rows="3" placeholder="Any other details to include"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Include QR Code</label>
+                    <div>
+                        <input type="checkbox" id="includeQR" checked>
+                        <label for="includeQR" style="display: inline; margin-left: 5px;">Yes</label>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button id="generateBtn" class="btn btn-block">Generate Card</button>
+                    <button id="resetBtn" class="btn btn-outline">Reset</button>
+                </div>
+            </section>
+
+            <section class="preview-section fade-in" style="animation-delay: 0.2s;">
+                <h2>Card Preview</h2>
+                <div class="card-container" id="card">
+                    <div class="card-header">
+                        <h2 id="cardTitleDisplay">VISITOR PASS</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-photo">
+                            <div class="photo-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="card-details">
+                            <p class="name">John Doe</p>
+                            <p class="company">ABC Corporation</p>
+                            <p><strong>ID Number:</strong> <span id="purposeDisplay">Meeting</span></p>
+                            <p><strong>Department:</strong> <span id="contactDisplay">Sarah Johnson</span></p>
+                            <p><strong>Valid Until:</strong> <span id="validUntilDisplay">31/12/2023</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <span id="additionalInfoDisplay">Authorized personnel only<br> Authorized Sign</span>
+                        <img src="" alt="Logo" class="card-logo" id="logoDisplay" style="display: none;">
+                    </div>
+                    <div class="qr-code" id="qrCodeDisplay">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://example.com/visitor/123" alt="QR Code">
+                    </div>
+                    
+                </div>
+                <div class="signature" id="signatureDisplay">
+                       
+                    </div>
+
+                <div class="action-buttons">
+                    <button id="downloadBtn" class="btn">
+                        <i class="fas fa-download"></i> Save as Image
+                    </button>
+                    <button id="saveTemplateBtn" class="btn btn-outline">
+                        <i class="fas fa-save"></i> Save Template
+                    </button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
